@@ -3,7 +3,7 @@ import axios from 'axios';
 class dishService {
   constructor(){
     let service = axios.create({
-      baseURL: `${process.env.REACT_APP_API_URL}/api/dishes`, 
+      baseURL: `${process.env.REACT_APP_API_URL}/dishes`, 
       withCredentials: true,
     });
     this.service = service;

@@ -120,8 +120,8 @@ console.log(" values  " + event.target.value);
               </Breadcrumb>
               <div className="col-12">
               { this.props.currentlyLoggedInDetail && 
-              <h4>h4h4 { this.props.currentlyLoggedInDetail._id } : 
-                { JSON.stringify( this.props._id) } 
+              <h4>username: { this.props.currentlyLoggedInDetail.username }
+                
               </h4>
                
               }

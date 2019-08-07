@@ -3,7 +3,7 @@ import axios from 'axios';
 class CommentService {
   constructor(){
     let service = axios.create({
-      baseURL: `${process.env.REACT_APP_API_URL}/api/comments`,
+      baseURL: `${process.env.REACT_APP_API_URL}/comments`,
       withCredentials: true,
     });
     this.service = service;
