@@ -26,8 +26,8 @@ console.log("comments = => " + comments);
     return (comments.map((cx, ijk)=>{
                           return <ListGroupItem key={ijk} >
                               <div>{cx.comment}</div>
-                              <div>{cx.rating} of 5 --{cx.author.username} , 
-                              <span>{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(cx.createdAt)))}</span>
+                              <div>{cx.rating} of 5 -by-  {cx.author.username} , 
+                              <span>  {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(cx.createdAt)))}</span>
                               </div>
                               
 
@@ -72,7 +72,7 @@ handleDeleteComment = (event)=> {
 
 handleSubmit = (event)=> {
   console.log('Current State is: ' + JSON.stringify(this.state));
-   alert('Current State is: ' + JSON.stringify(this.state));
+  //  alert('Current State is: ' + JSON.stringify(this.state));
   event.preventDefault();
   this.commentservice
   .addNewComment(this.state.rating, 
