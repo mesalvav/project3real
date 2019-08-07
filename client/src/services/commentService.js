@@ -1,9 +1,9 @@
 import axios from 'axios';
-
+// baseURL: 'http://localhost:5000/api/comments',
 class CommentService {
   constructor(){
     let service = axios.create({
-      baseURL: 'http://localhost:5000/api/comments',
+      baseURL: `${process.env.REACT_APP_API_URL}/api/comments`,
       withCredentials: true,
     });
     this.service = service;
