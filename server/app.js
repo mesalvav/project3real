@@ -16,7 +16,7 @@ const session       = require('express-session');
 const passport      = require('passport');
 
 mongoose
-  .connect('mongodb://localhost/back-end-restaurant', {useNewUrlParser: true})
+  .connect(process.env.MONGODB_URI, {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -67,6 +67,11 @@ app.use(cors({
   credentials: true,
   origin: ['http://localhost:3000']
 }));
+
+app.use((req, res, next) => {
+  // If no routes match, send them the React HTML.
+  res.sendFile(__dirname + "/public/index.html");
+});
 
 const index = require('./routes/index');
 app.use('/', index);
