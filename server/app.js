@@ -65,13 +65,10 @@ app.use(passport.session());
 
 app.use(cors({
   credentials: true,
-  origin: ['http://localhost:3000']
+  origin: ['http://localhost:3000', 'https://restaurantheroapp.herokuapp.com']
 }));
 
-app.use((req, res, next) => {
-  // If no routes match, send them the React HTML.
-  res.sendFile(__dirname + "/public/index.html");
-});
+
 
 const index = require('./routes/index');
 app.use('/', index);
@@ -84,5 +81,11 @@ app.use('/api/dishes', dishRouter);
 
 const commentRouter = require('./routes/commentRouter');
 app.use('/api/comments', commentRouter);
+
+
+app.use((req, res, next) => {
+  // If no routes match, send them the React HTML.
+  res.sendFile(__dirname + "/public/index.html");
+});
 
 module.exports = app;
