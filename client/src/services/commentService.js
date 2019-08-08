@@ -19,8 +19,14 @@ class CommentService {
     .catch(err=>console.log(err))
   }
 
-  deleteComment = (dishid, commentid)=>{
-    return this.service.post('deletecomment', {dishid,commentid })
+  // deleteComment = (dishid, commentid)=>{
+  //   return this.service.post('deletecomment', {dishid,commentid })
+  //   .then(response=>response.data)
+  //   .catch(err=>{console.log(err)})
+  // }
+
+  deleteComment = (commentid)=>{
+    return this.service.delete('deletecomment/'+commentid)
     .then(response=>response.data)
     .catch(err=>{console.log(err)})
   }

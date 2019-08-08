@@ -32,10 +32,10 @@ router.post('/addcomment', (req, res, next) => {
   
 });
 
-router.post('/deletecomment', (req, res, next) => {
-  const {  dishid, commentid } = req.body;
+router.delete('/deletecomment/:commentid', (req, res, next) => {
+  // const {  dishid, commentid } = req.body;
   
-  Comment.findOneAndRemove(commentid)
+  Comment.findOneAndRemove(req.params.commentid)
   .then((response=>{
     res.status(200).json(response);
 

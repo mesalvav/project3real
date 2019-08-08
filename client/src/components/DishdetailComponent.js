@@ -99,12 +99,12 @@ handleUpdateComment = (event)=> {
 
 handleDeleteComment = (commentid)=> {
   
-  //  alert('Comment ID : ' + JSON.stringify(commentid));
+   // alert('Comment ID : ' + JSON.stringify(commentid));
    this.commentservice
    .deleteComment(commentid)
    .then(response=>{
       // console.log("comment deleted + " + response);
-      this.props.getAllDishes();
+      this.props.getAllDishes(); 
    })
    .catch(err=>{console.log(err)})
   // event.preventDefault();
