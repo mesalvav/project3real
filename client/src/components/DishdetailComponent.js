@@ -134,6 +134,7 @@ console.log(" values  " + event.target.value);
                   <RenderDish dish={this.props.dish} />
               </div>
               <div className="col-12 col-md-5 m-1">
+                <h3>Comments</h3>
                   { this.props.currentlyLoggedInDetail &&
                   <Button outline onClick={this.toggleModal} type="submit" value="submit" color="primary">Leave a Comment</Button>
                   }

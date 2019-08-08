@@ -128,7 +128,7 @@ class Header extends React.Component {
                         <div className="row row-header">
                             <div className="col-12 col-sm-6">
                                 <h1>Restaurante Denika</h1>
-                                <p>We take inspiration from the World's best cuisines, and create a unique fusion experience. Our lipsmacking creations will tickle your culinary senses!</p>
+                                <p>Denika is the sort of place you find through the recommendation of a friend  — a friend who happens to know a thing or two about good Nicaraguan cuisine. At Denika, the jugos are fresh, the carne asada is juicy, and the portions are large enough to share between a few people.!</p>
                             </div>
                         </div>
                     </div>
