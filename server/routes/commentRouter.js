@@ -57,9 +57,17 @@ router.post('/deletecomment', (req, res, next) => {
 
   })
  
-
+  router.post('/updatecomment', (req, res, next) => {
+    const {  commentid, rating, comment } = req.body;
+     
+    Comment.findByIdAndUpdate(commentid, {rating:rating, comment: comment})
+    .then((response=>{
+      res.status(200).json(response);
   
-
+    }))
+    .catch(err=>console.log(err))
+  
+  })
 
 
 module.exports = router;

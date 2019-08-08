@@ -24,6 +24,12 @@ class CommentService {
     .then(response=>response.data)
     .catch(err=>{console.log(err)})
   }
+
+  updateComment  = (commentid, rating, comment)=>{
+    return this.service.post('updatecomment', {commentid, rating, comment})
+    .then(response=>response.data)
+    .catch(err=>console.log(err))
+  }
   
 }
 

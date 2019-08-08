@@ -19,7 +19,7 @@ function RenderDish({dish}) {
   )
 }
  
-function RenderComments({comments, handleDeleteComment, toggleUpdateModal}) {
+function RenderComments({comments, handleDeleteComment, toggleUpdateModal, currentlyLoggedInDetail}) {
 
 console.log("comments = => " + comments);
 
@@ -30,9 +30,12 @@ console.log("comments = => " + comments);
                               <span>  {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(cx.createdAt)))}</span>
                               </div>
                               
-
+                              { currentlyLoggedInDetail &&
+                               <div>
                               <Button  onClick={()=>{handleDeleteComment(cx._id)} } type="submit" value="submit" color="danger" size="sm">Delete</Button>
                               <Button   onClick={ ()=>{toggleUpdateModal(cx )} } type="submit" value="submit" color="warning" size="sm">Update</Button>
+                              </div>
+                              }
                           </ListGroupItem> }));
 
 }
@@ -48,6 +51,7 @@ constructor(props){
     rating: '1',
     message: 'comment here',
     isUpdateModalOpen: false,
+    willUpdateCommentID:'ididididid',
 };
 // this.RenderComments = this.RenderComments.bind(this);
 this.commentservice = new CommentService();
@@ -55,19 +59,20 @@ this.commentservice = new CommentService();
 
 
 toggleModal = ()=> {
-  console.log("togglin modal..");
+ //  console.log("togglin modal..");
   this.setState({
     isModalOpen: !this.state.isModalOpen
   });
 
 }
 toggleUpdateModal = (cx)=> {
-  console.log("togglin UPDATE modal.." );
+  // console.log("togglin UPDATE modal.." );
       if (cx) { 
       this.setState({
         rating: cx.rating,
         message: cx.comment,
-        isUpdateModalOpen: !this.state.isUpdateModalOpen
+        isUpdateModalOpen: !this.state.isUpdateModalOpen,
+        willUpdateCommentID: cx._id
       });
 
     } else {
@@ -78,20 +83,27 @@ toggleUpdateModal = (cx)=> {
 }
 
 handleUpdateComment = (event)=> {
-  alert('Current State is: ' + JSON.stringify(this.state));
-
-
+ // alert('Current State is: ' + JSON.stringify(this.state));
   event.preventDefault();
-  this.toggleUpdateModal();
+  this.commentservice
+  .updateComment(this.state.willUpdateCommentID, this.state.rating, this.state.message)
+  .then(response=>{
+
+    console.log(response);
+    this.props.getAllDishes();
+    this.toggleUpdateModal();
+  })
+  .catch(err=>{console.log(err)})
+
 }
 
 handleDeleteComment = (commentid)=> {
   
-   alert('Comment ID : ' + JSON.stringify(commentid));
+  //  alert('Comment ID : ' + JSON.stringify(commentid));
    this.commentservice
    .deleteComment(commentid)
    .then(response=>{
-      console.log("comment deleted + " + response);
+      // console.log("comment deleted + " + response);
       this.props.getAllDishes();
    })
    .catch(err=>{console.log(err)})
@@ -172,6 +184,7 @@ console.log(" values  " + event.target.value);
                           comments={this.props.dish.comments}
                           handleDeleteComment={this.handleDeleteComment}
                           toggleUpdateModal={this.toggleUpdateModal}
+                          currentlyLoggedInDetail={this.props.currentlyLoggedInDetail}
                           />
                           
                   </ListGroup>
