@@ -19,7 +19,7 @@ function RenderDish({dish}) {
   )
 }
  
-function RenderComments({comments, handleDeleteComment}) {
+function RenderComments({comments, handleDeleteComment, toggleUpdateModal}) {
 
 console.log("comments = => " + comments);
 
@@ -32,7 +32,7 @@ console.log("comments = => " + comments);
                               
 
                               <Button  onClick={()=>{handleDeleteComment(cx._id)} } type="submit" value="submit" color="danger" size="sm">Delete</Button>
-                              <Button  type="submit" value="submit" color="warning" size="sm">Update</Button>
+                              <Button   onClick={ ()=>{toggleUpdateModal(cx )} } type="submit" value="submit" color="warning" size="sm">Update</Button>
                           </ListGroupItem> }));
 
 }
@@ -46,7 +46,8 @@ constructor(props){
     isModalOpen: false,
     thename: 'nombre',
     rating: '1',
-    message: 'comment here'
+    message: 'comment here',
+    isUpdateModalOpen: false,
 };
 // this.RenderComments = this.RenderComments.bind(this);
 this.commentservice = new CommentService();
@@ -58,6 +59,30 @@ toggleModal = ()=> {
   this.setState({
     isModalOpen: !this.state.isModalOpen
   });
+
+}
+toggleUpdateModal = (cx)=> {
+  console.log("togglin UPDATE modal.." );
+      if (cx) { 
+      this.setState({
+        rating: cx.rating,
+        message: cx.comment,
+        isUpdateModalOpen: !this.state.isUpdateModalOpen
+      });
+
+    } else {
+      this.setState({
+        isUpdateModalOpen: !this.state.isUpdateModalOpen
+      });
+    }
+}
+
+handleUpdateComment = (event)=> {
+  alert('Current State is: ' + JSON.stringify(this.state));
+
+
+  event.preventDefault();
+  this.toggleUpdateModal();
 }
 
 handleDeleteComment = (commentid)=> {
@@ -145,12 +170,14 @@ console.log(" values  " + event.target.value);
 
                   <RenderComments 
                           comments={this.props.dish.comments}
-                          handleDeleteComment={this.handleDeleteComment}/>
-
+                          handleDeleteComment={this.handleDeleteComment}
+                          toggleUpdateModal={this.toggleUpdateModal}
+                          />
+                          
                   </ListGroup>
               </div>
           </div>
-
+{/* modal for add comment */}
           <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
                 <ModalHeader toggle={this.toggleModal}>Submit Comment</ModalHeader>
                 <ModalBody>
@@ -192,6 +219,42 @@ console.log(" values  " + event.target.value);
 
                 </ModalBody>
                 </Modal>
+      {/* modal for update */}
+             <Modal isOpen={this.state.isUpdateModalOpen} toggle={this.toggleUpdateModal}>
+                <ModalHeader toggle={this.toggleUpdateModal}>Update Comment</ModalHeader>
+                <ModalBody>
+                <Form onSubmit={this.handleUpdateComment}>
+                  <FormGroup>
+                      <Label htmlFor="rating">Rating</Label>
+                      
+                      <Input  type="select" name="rating" id="rating" 
+                                           onChange={this.handleInputChange}
+                                           value={this.state.rating}
+                                           >
+                                        <option >1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        
+                                    </Input>
+                    </FormGroup>
+                     {/* name group was here... */}
+                      <FormGroup >
+                          <Label htmlFor="message" >Comment</Label>
+                          
+                              <Input type="textarea" id="message" name="message"
+                                  rows="12"
+                                  value={this.state.message}
+                                  onChange={this.handleInputChange}
+                                  ></Input>
+                          
+                      </FormGroup>
+                      <Button type="submit" value="submit" color="primary">Submit</Button>
+                    </Form>
+                </ModalBody>
+                </Modal>
+
 
           </div>
       
