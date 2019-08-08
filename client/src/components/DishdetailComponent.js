@@ -19,7 +19,7 @@ function RenderDish({dish}) {
   )
 }
  
-function RenderComments({comments}) {
+function RenderComments({comments, handleDeleteComment}) {
 
 console.log("comments = => " + comments);
 
@@ -31,8 +31,8 @@ console.log("comments = => " + comments);
                               </div>
                               
 
-                              <Button  type="submit" value="submit" color="danger">Delete</Button>
-                             
+                              <Button  onClick={()=>{handleDeleteComment(cx._id)} } type="submit" value="submit" color="danger" size="sm">Delete</Button>
+                              <Button  type="submit" value="submit" color="warning" size="sm">Update</Button>
                           </ListGroupItem> }));
 
 }
@@ -51,10 +51,6 @@ constructor(props){
 // this.RenderComments = this.RenderComments.bind(this);
 this.commentservice = new CommentService();
 }
-//
- 
-
-//
 
 
 toggleModal = ()=> {
@@ -64,10 +60,17 @@ toggleModal = ()=> {
   });
 }
 
-handleDeleteComment = (event)=> {
-  console.log('Current State is: ' + JSON.stringify(this.state));
-   alert('Current State is: ' + JSON.stringify(this.state));
-  event.preventDefault();
+handleDeleteComment = (commentid)=> {
+  
+   alert('Comment ID : ' + JSON.stringify(commentid));
+   this.commentservice
+   .deleteComment(commentid)
+   .then(response=>{
+      console.log("comment deleted + " + response);
+      this.props.getAllDishes();
+   })
+   .catch(err=>{console.log(err)})
+  // event.preventDefault();
 }
 
 handleSubmit = (event)=> {
@@ -140,7 +143,10 @@ console.log(" values  " + event.target.value);
                   }
                   <ListGroup>
 
-                  <RenderComments comments={this.props.dish.comments} />
+                  <RenderComments 
+                          comments={this.props.dish.comments}
+                          handleDeleteComment={this.handleDeleteComment}/>
+
                   </ListGroup>
               </div>
           </div>
