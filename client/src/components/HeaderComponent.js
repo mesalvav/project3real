@@ -87,7 +87,7 @@ class Header extends React.Component {
                 <Navbar dark expand="md">
                     <div className="container">
                         <NavbarToggler onClick={this.toggleNav} />
-                        <NavbarBrand className="mr-auto" href="/"><img src='assets/images/bandera.png' height="30" width="41" alt='Ristorante Con Fusion' /></NavbarBrand>
+                        <NavbarBrand className="mr-auto" href="/"><img src='assets/images/bandera.png' height="30" width="41" alt='Denika Restaurant' /></NavbarBrand>
                         <Collapse isOpen={this.state.isNavOpen} navbar>
                             <Nav navbar>
                                 <NavItem>
@@ -119,8 +119,7 @@ class Header extends React.Component {
                         
                     </div>
 
-                    
-                            
+                        
 
                 </Navbar>
                 <Jumbotron>
@@ -129,6 +128,9 @@ class Header extends React.Component {
                             <div className="col-12 col-sm-6">
                                 <h1>Restaurante Denika</h1>
                                 <p>Denika is the sort of place you find through the recommendation of a friend  — a friend who happens to know a thing or two about good Nicaraguan cuisine. At Denika, the jugos are fresh, the carne asada is juicy, and the portions are large enough to share between a few people.!</p>
+                            </div>
+                            <div className="col-12 col-sm-6">
+                            <img src="assets/images/bandera.png" className="img-fluid" alt=""/> 
                             </div>
                         </div>
                     </div>

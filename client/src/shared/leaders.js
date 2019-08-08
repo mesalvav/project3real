@@ -33,6 +33,6 @@ export const LEADERS = [
     designation: 'Executive Chef',
     abbr: 'EC',
     featured: true,
-    description: 'has been a semi-finalist three times for the James Beard Prize, considered the “Oscar of the kitchen”.  The prestigious culinary magazine Food & Wine has included him in their Hall of Fame and in their list of the Top Ten Chefs in the United States.'
+    description: 'has been a semi-finalist three times for the James Beard Prize, considered the “Oscar of the kitchen”.'
   }
 ];

@@ -36,7 +36,7 @@ class Main extends Component {
   
   onDishSelect(dishId) {
     this.setState({ selectedDish: dishId});
-    console.log("==== was clicked. line 19 id ===> "  );
+    // console.log("==== was clicked. line 19 id ===> "  );
   }
 
   componentDidMount(){
@@ -46,7 +46,7 @@ class Main extends Component {
   getAllDishes = ()=>{
     this.dishservice.getAllDishes()
     .then((datum)=>{
-      console.log(datum[0]);
+      // console.log(datum[0]);
       //datum[0].comments.map(eachComment=>{ console.log(eachComment); return true;});
 
       this.setState({dishes: datum, ready: true});
